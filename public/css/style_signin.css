@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto;
+}
+body{
+    background-color: rgb(18, 104, 100);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container{
+    width: 42%;
+    height: 44%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 35px 55px rgb(29, 27, 27);
+    margin: 50px;
+}
+
+.container h1{
+    font-family:Arial, Helvetica, sans-serif;
+    /* margin: 60px 10px 10px 50px; */
+    margin-top: 10%;
+    margin-left: 7%;
+    margin-bottom: 1%;
+    color: rgb(1, 13, 13);
+    height: 40px;
+    font-size: 36px;
+}
+
+.container span{
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: flex-start;
+    font-family:'Times New Roman', Times, serif;
+    margin-left: 7%;
+}
+
+
+.container span a{
+    color: rgb(25, 132, 96);
+    text-decoration: none;
+}
+
+.container span a:hover{
+    color: rgb(37, 16, 104);
+}
+
+.verification{
+    height: 20%;
+    display: inline-block;
+    margin-bottom: 1%;
+    width: 100%;
+}
+.box{
+     width: 86%;
+     height: 35px;
+     border: 1px solid rgb(27, 117, 117);
+     border-radius: 5px;
+     padding: 5px;
+}
+.email_container{
+    width: 95%;
+    /* background-color: brown; */
+    display: flex;
+    justify-content: center;
+}
+
+.fa-solid{
+    background:rgb(86, 190, 153);
+    margin-left: 7%;
+    margin-right: 1%;
+    border-radius: 5px;
+    color: whitesmoke;
+    border: 5px;
+    padding: 2%;
+    margin-bottom: 2%;
+    border: 1px solid rgb(27, 117, 117);
+}
+
+.fa-solid:hover{
+    background-color: rgb(119, 228, 228);
+    color:black;
+}
+
+input[type=email]:focus{
+    outline: 4px solid rgb(119, 228, 228);     
+}
+
+input[type=password]:focus{
+    outline: 4px solid rgb(119, 228, 228);     
+}
+
+.login_forget{
+    display: flex;
+    justify-content: space-between;
+}
+#Login{
+    background-color: rgb(86, 190, 153);
+    margin-left: 7%;
+    padding: 2% 5%;
+    border-radius: 5px;
+    color: whitesmoke;
+    font-size: 20px;
+    border: 1px solid rgb(86, 190, 153);
+}
+
+#Login:hover{
+    background-color: rgb(119, 228, 228);
+    color:black;
+}
+
+.forget{
+    float: right;
+    margin-right: 10%;
+    margin-top: 2%;
+}
+
+.forget a{
+    color: rgb(25, 132, 96);
+    font-weight: 400;
+    font-size: medium;
+}
+
+.forget a:hover{
+    color: rgb(37, 16, 104);
+    font-weight: 400;
+    font-size: medium;
+}
+
+@media screen and (min-width: 1025px) {
+    .container{
+        width: 42%;
+        height: 62%;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 35px 55px rgb(29, 27, 27);
+        margin: 50px;
+    }
+    .container h1{
+        font-family:Arial, Helvetica, sans-serif;
+        margin: 30px 10px 10px 30px;
+        color: rgb(1, 13, 13);
+        height: 40px;
+        font-size: 36px;
+    }
+    
+    .container span{
+        margin-bottom: 18px;
+        display: inline-block;
+        font-family:'Times New Roman', Times, serif;
+        margin-left: 30px;
+    }
+    
+    .container span ins{
+        color: rgb(25, 132, 96);
+    }
+
+    .verification{
+        height: 20%;
+        display: inline-block;
+        margin-bottom: 4%;
+        width: 100%;
+    }
+     
+    .fa-solid{
+         background:rgb(86, 190, 153);
+         margin-left: 30px;
+         border-radius: 5px;
+         color: whitesmoke;
+         border: 5px;
+         padding: 10px;
+         margin-bottom: 15px;
+         border: 1px solid rgb(27, 117, 117);
+    }
+     
+     
+    .box{
+         width: 86%;
+         height: 35px;
+         border: 1px solid rgb(27, 117, 117);
+         border-radius: 5px;
+         padding: 5px;
+    }
+
+    #Login{
+        background-color: rgb(86, 190, 153);
+        margin-left: 30px;
+        padding: 10px 25px 10px 25px;
+        border-radius: 5px;
+        color: whitesmoke;
+        font-size: 20px;
+        border: 1px solid rgb(86, 190, 153);
+    }
+    
+    
+    .forget{
+        float: right;
+        margin-right: 50px;
+        margin-top: 10px;
+    }
+    
+    .forget a{
+        color: rgb(25, 132, 96);
+        font-weight: 400;
+        font-size: medium;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container{
+        width: 42%;
+        height: 65%;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 35px 55px rgb(29, 27, 27);
+        margin: 50px;
+    }
+   
+    .container h1{
+        font-family:Arial, Helvetica, sans-serif;
+        margin: 30px 10px 10px 30px;
+        color: rgb(1, 13, 13);
+        height: 40px;
+        font-size: 36px;
+    }
+    
+    .container span{
+        margin-bottom: 18px;
+        display: inline-block;
+        font-family:'Times New Roman', Times, serif;
+        margin-left: 30px;
+    }
+    
+    .container span ins{
+        color: rgb(25, 132, 96);
+    }
+
+    .verification{
+        height: 20%;
+        display: inline-block;
+        margin-bottom: 1%;
+        width: 100%;
+    }
+    .fa-solid{
+         background:rgb(86, 190, 153);
+         margin-left: 30px;
+         border-radius: 5px;
+         color: whitesmoke;
+         border: 5px;
+         padding: 10px;
+         margin-bottom: 15px;
+         border: 1px solid rgb(27, 117, 117);
+    }
+     
+     
+    .box{
+        width: 86%;
+        height: 35px;
+        border: 1px solid rgb(27, 117, 117);
+        border-radius: 5px;
+        padding: 5px;
+   }
+
+    #Login{
+        background-color: rgb(86, 190, 153);
+        margin-left: 30px;
+        padding: 10px 25px 10px 25px;
+        border-radius: 5px;
+        color: whitesmoke;
+        font-size: 20px;
+        border: 1px solid rgb(86, 190, 153);
+    }
+    
+    
+    .forget{
+        float: right;
+        margin-right: 50px;
+        margin-top: 10px;
+    }
+    
+    .forget a{
+        color: rgb(25, 132, 96);
+        font-weight: 400;
+        font-size: medium;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .container{
+        width: 50%;
+        height: 65vh;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 35px 55px rgb(29, 27, 27);
+        margin: 50px;
+    }
+   
+    .verification{
+        height: 20%;
+        display: inline-block;
+        margin-bottom: 1%;
+        width: 100%;
+    }
+
+    .box{
+        width: 86%;
+        height: 35px;
+        border: 1px solid rgb(27, 117, 117);
+        border-radius: 5px;
+        padding: 5px;
+   }
+   #Login{
+        background-color: rgb(86, 190, 153);
+        margin-left: 10%;
+        padding: 7px 15px 7px 15px;
+        border-radius: 5px;
+        color: whitesmoke;
+        font-size: 15px;
+        border: 1px solid rgb(86, 190, 153);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container{
+        width: 70%;
+        height: 60vh;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 35px 55px rgb(29, 27, 27);
+        margin: 20px;
+    }
+    .container h1{
+        font-family:Arial, Helvetica, sans-serif;
+        margin: 20px 10px 10px 30px;
+        color: rgb(1, 13, 13);
+        height: 40px;
+        font-size: 36px;
+    }
+    
+    .container span{
+        margin-bottom: 18px;
+        display: inline-block;
+        font-family:'Times New Roman', Times, serif;
+        margin-left: 20px;
+    }
+    
+    .container span ins{
+        color: rgb(25, 132, 96);
+    }
+
+    .verification{
+        height: 20%;
+        display: inline-block;
+        margin-bottom: 1%;
+        width: 100%;
+    }
+
+    .fa-solid{
+        background:rgb(86, 190, 153);
+        margin-left: 20px;
+        border-radius: 5px;
+        color: whitesmoke;
+        border: 5px;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid rgb(27, 117, 117);
+   }
+    
+    
+   .box{
+        width: 86%;
+        height: 35px;
+        border: 1px solid rgb(27, 117, 117);
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+   #Login{
+       background-color: rgb(86, 190, 153);
+       margin-left: 20px;
+       padding: 5px 10px 5px 10px;
+       border-radius: 5px;
+       color: whitesmoke;
+       font-size: 15px;
+       border: 1px solid rgb(86, 190, 153);
+   }
+   
+   
+   .forget{
+       float: right;
+       margin-right: 20px;
+       margin-top: 5px;
+   }
+}

@@ -1,0 +1,356 @@
+/* Navbar or header */
+.navbar_editor{
+  width: 100vw;
+  height: 10vh;
+  background-color: rgb(27, 117, 117);
+  display: flex;
+}
+
+.navbar_editor .editor_name{
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar_editor .editor_name h3{
+  color: whitesmoke;
+  font-size: 21px;
+}
+
+.navbar_editor .invite{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.navbar_editor .invite button{
+  width: 90px;
+  height: 40%;
+  padding: 5px;
+  margin-left: 10px;
+  border-radius:40px;
+  background: white;
+  border: 1px solid grey;
+  outline: none;
+}
+
+.navbar_editor .darkmode{
+  width: 90px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar_editor .profile {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* background-color: blue; */
+}
+
+.navbar_editor .profile p {
+  width: 80px;
+  height: 40%;
+  margin-left: 2px;
+  color: white;
+}
+.navbar_editor .profile img {
+  width: 60px;
+  height: 60%;
+  border-radius: 50%;
+  margin-right: 50px;
+}
+
+.info {
+  width: 120px;
+  height: 100px;
+  list-style: none;
+  background-color: #d6dee1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #192734;
+  position: absolute;
+  top: 65px;
+  right: 30px;
+}
+.info li a {
+  text-decoration: none;
+  color: white;
+}
+
+#logout,#Profile_details,#edit_password{
+  color: white;
+  cursor: pointer;
+}
+
+.infoDisplay {
+  display: none;
+}
+
+
+@media screen and (min-width: 1025px){
+  .navbar_editor{
+    width: 100vw;
+    height: 10vh;
+    background-color: rgb(27, 117, 117);
+    display: flex;
+  }
+  
+  .navbar_editor .editor_name{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .navbar_editor .editor_name h3{
+    color: whitesmoke;
+    font-size: 21px;
+  }
+  
+  .navbar_editor .invite{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .navbar_editor .invite button{
+    width: 90px;
+    height: 40%;
+    padding: 2px;
+    margin-left: 10px;
+    border-radius:40px;
+    background: white;
+    border: 1px solid grey;
+    outline: none;
+  }
+  
+  .navbar_editor .darkmode{
+    width: 90px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .navbar_editor .profile {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* background-color: blue; */
+  }
+  
+  .navbar_editor .profile p {
+    width: 80px;
+    height: 40%;
+    margin-left: 2px;
+    color: white;
+  }
+
+}
+
+
+@media screen and (max-width: 1025px){
+  .navbar_editor{
+    width: 100vw;
+    height: 10vh;
+    background-color: rgb(27, 117, 117);
+    display: flex;
+  }
+  
+  .navbar_editor .editor_name{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .navbar_editor .editor_name h3{
+    color: whitesmoke;
+    font-size: 16px;
+  }
+  
+  .navbar_editor .invite{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .navbar_editor .invite button{
+    width: 90px;
+    height: 40%;
+    padding: 2px;
+    margin-left: 10px;
+    border-radius:40px;
+    background: white;
+    border: 1px solid grey;
+    outline: none;
+  }
+  
+  .navbar_editor .darkmode{
+    width: 90px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .navbar_editor .profile {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* background-color: blue; */
+  }
+  
+  .navbar_editor .profile p {
+    width: 80px;
+    height: 40%;
+    margin-left: 2px;
+    color: white;
+  }
+
+}
+
+@media screen and (max-width: 768px){
+  .navbar_editor{
+    width: 100vw;
+    height: 10vh;
+    background-color: rgb(27, 117, 117);
+    display: flex;
+  }
+  
+  .navbar_editor .editor_name{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .navbar_editor .editor_name h3{
+    color: whitesmoke;
+    font-size: 14px;
+  }
+  
+  .navbar_editor .invite{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .navbar_editor .invite button{
+    width: 90px;
+    height: 40%;
+    padding: 2px;
+    margin-left: 10px;
+    border-radius:40px;
+    background: white;
+    border: 1px solid grey;
+    outline: none;
+  }
+  
+  .navbar_editor .darkmode{
+    width: 90px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .navbar_editor .profile {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* background-color: blue; */
+  }
+  
+  .navbar_editor .profile p {
+    width: 65px;
+    height: 40%;
+    margin-left: 2px;
+    color: white;
+    font-size: 12px;
+  }
+
+}
+
+@media screen and (max-width: 480px){
+  .navbar_editor{
+    width: 100vw;
+    height: 10vh;
+    background-color: rgb(27, 117, 117);
+    display: flex;
+  }
+  
+  .navbar_editor .editor_name{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .navbar_editor .editor_name h3{
+    color: whitesmoke;
+    font-size: 10px;
+  }
+  
+  .navbar_editor .invite{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .navbar_editor .invite button{
+    width: 90px;
+    height: 40%;
+    padding: 1px;
+    margin-left: 10px;
+    border-radius:40px;
+    background: white;
+    border: 1px solid grey;
+    outline: none;
+  }
+  
+  .navbar_editor .darkmode{
+    width: 90px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .navbar_editor .profile {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* background-color: blue; */
+  }
+  
+  .navbar_editor .profile p {
+    width: 80px;
+    height: 40%;
+    margin-left: 2px;
+    color: white;
+    font-size: 10px;
+    margin-left: 4%;
+  }
+
+}

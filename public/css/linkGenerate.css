@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+
+body{
+    width: 100vw;
+    height: 100vh;
+}
+.outer{
+    width: 100%;
+    height: calc((100% - 65px));
+    background:url('/image/back_ground.png') no-repeat center center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inner{
+    width: 100%;
+    margin-top: 60px;
+}
+
+.inner h2{
+    text-align: center;
+}
+
+.inner p{
+    text-align: center;
+    font-size: medium;
+}
+
+
+.link_container{
+    width: 350px;
+    height: 250px;
+    background-color: white;
+    box-shadow: 0px 0px 15px 3px grey;
+    margin-top: 60px;
+    border-radius: 20px;
+}
+
+
+.outer_link_box{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.link_box{
+    width: 80%;
+    height: 35px;
+    border: 1px solid rgb(61, 61, 61);
+    background-color: rgb(212, 210, 210);
+    border-radius: 100px;
+    margin-bottom: 40px;
+    display: flex;
+
+}
+.link_box input{
+    width: 85%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 2px;
+    background: none;
+}
+.generateLinkButton{
+    width: 18%;
+    height: 100%;
+    background-color:  rgb(86, 190, 153);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    cursor: pointer;
+    color: white;
+}
+
+.generateLinkButton:hover{
+    background-color: rgb(119, 228, 228);
+    color: black;
+}
+
+.btn{
+    width: 85%;
+    height: 20%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.btn button{
+    width: 120px;
+    height: 35px;
+    padding: 10px;
+    border-radius: 100px;
+    border: none;
+    background-color:  rgb(86, 190, 153);
+    cursor: pointer;
+    color: white;
+}
+
+
+.btn button:hover{
+    background-color: rgb(119, 228, 228);
+    color: #000;
+}

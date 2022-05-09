@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= locals.title %></title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" 
+    integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+
+    <link rel="stylesheet" href="/css/editor.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+</head>
+<body>
+   
+    
+    <!-- navbar -->
+        <%- include('partial/navbar.ejs') %>
+    <!-- Main Body -->
+
+    <!-- Welcome Body -->
+    <textarea id="notepad" class="notepad"></textarea>
+
+    <!-- Editor Body -->
+    <main class="editor hidden" id="editor">
+        <div class="inner_editor">
+            <div class="code_block">
+                <div class="select-file">
+                    <select name="language" required >
+                        <option value="c">C-lang</option>
+                        <option value="cpp">C++</option>
+                        <option value="py">Python</option>
+                        <option value="cs">C#</option>
+                        <option value="java">Java</option>
+                        <option value="js">JavaScript</option>
+                        <option value="go">Go</option>
+                        <option value="php">Php</option>
+                        <option value="kt">Kotlin</option>
+                        <option value="ts">TypeScript</option>
+                        <option value="rb">Ruby</option>
+                        <option value="pl">Perl</option>
+                    </select>
+                    <input type="file" id="fileToLoad">
+                    <label for="fileToLoad">Open File</label>
+                </div>
+                <div class="textarea">
+                    <textarea name="editor_window" cols="108" rows="13" id="editor_textarea"></textarea>
+                </div>
+                <div class="button">
+                    <button id="clear" style="background-color: grey;">Clear</button>
+                    <button id="run" style="background-color: rgb(88, 26, 26);">Run</button>
+                    <button id="dwn-btn">Save</button>
+                </div>
+            </div>
+            <div class="input_output">
+                <div class="input">
+                    <h4 >Input</h4>
+                    <textarea name="input" cols="47" rows="4" id="input_textarea"></textarea>
+                </div>
+                <div class="output">
+                    <h4>Output</h4>
+                    <div name="output" cols="47" rows="10" id="output_textarea"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" 
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="/js/editor.js"></script>
+    <script type="module" src="/js/main.js"></script>
+</body>
+</html>
