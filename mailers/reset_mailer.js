@@ -9,7 +9,7 @@ module.exports.resetPassword = (url, receiver)=>{
         subject:'Regard reset password',
         html: htmlString
     }),(err,info)=>{
-        if(err){console.log('err in new comment',err); return}
+        if(err){console.log('err in new comment',err); return;}
         console.log('Message info ', info);
         return;
     }

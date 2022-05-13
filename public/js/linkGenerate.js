@@ -6,7 +6,7 @@ function copyLink(){
         linkContent.select();
         navigator.clipboard.writeText(linkContent.val());
         if(copyButton.text() === 'Copy'){
-            $.notify('Password Copied',"success");
+            $.notify('Link Copied',"success");
         }
     });
 }
@@ -39,45 +39,65 @@ function showProfileOption(){
 
 
 function getLinkFromServer(){
-    const linkBox = $('.link_box>input');
     const generateLinkButton = $('.generateLinkButton');
-    const inviteFriends = $('.invites');
-    const join = $('.join');
-
+    
     // get link
     generateLinkButton.click(async function(){
         try {
-            let data = await axios.get('/users/getlinkFromServer',{headers:{'authorization': `Bearer ${localStorage.getItem('token')}`}});
+            let data = await axios.get('/users/getlinkFromServer',{headers:{'authorization': `Bearer ${$.cookie('token')}`}});
+            getlink(data.data.data.Url);
             
-            // keep coming url into inputbox
-            linkBox.val(data.data.data.Url);
-            if(generateLinkButton.text() === 'Create'){
-                $.notify('Link Generated',"success");
-            }
-            generateLinkButton.text('Copy')
-            
-            //append the came url into join button
-            join.html(`<a href="${data.data.data.Url}" target="_blank"><span><i class="fa fa-users"></i></span> Join</a>`)
-            
-            inviteFriends.html(`</span><a href="mailto:faizanahmed9801@gmail.com"><span><i class="fa fa-share-alt"></i> Invite Friend</a>`)
             
         } catch (error) {
-            $.notify(error.response.data.message,"error");
-            console.log('error after token expired',error);
+            if(error.response && error.response.status === 401 && error.response.data.message === "TokenExpiredError"){
+                // get new access and reference token.
+                const token = await axios.post('/users/refresh_token',{'token':$.cookie('ref_token')});
+
+                // set tokens in cookies
+                $.cookie("token", token.data.data.access_token, {path:'/'});
+                $.cookie("ref_token", token.data.data.refresh_token, {path:'/'});
+
+                let data = await axios.get('/users/getlinkFromServer',{headers:{'authorization': `Bearer ${$.cookie('token')}`}});
+                getlink(data.data.data.Url);
+                return;
+            }
+            if(error.response){
+                $.notify(error.response.data.message,"error");
+                return;
+            }
+            $.notify(error,"error");
         }
     })
+}
+
+function getlink(url){
+    const inviteFriends = $('.invites');
+    const join = $('.join');
+    const linkBox = $('.link_box>input');
+    const generateLinkButton = $('.generateLinkButton');
+
+    // keep coming url into inputbox
+    linkBox.val(url);
+    if(generateLinkButton.text() === 'Create'){
+        $.notify('Link Generated',"success");
+    }
+    generateLinkButton.text('Copy')
+    
+    //append the came url into join button
+    join.html(`<a href="${url}" target="_blank"><span><i class="fa fa-users"></i></span> Join</a>`)
+    
+    inviteFriends.html(`</span><a href="mailto:faizanahmed9801@gmail.com"><span><i class="fa fa-share-alt"></i> Invite Friend</a>`)
 }
 
 function logout(){
     $('#logout').click(function(){
         $.removeCookie('token', { path: '/' });
-        localStorage.removeItem('token');
-        localStorage.removeItem('ref_token');
+        $.removeCookie('ref_token', { path: '/' });
         $.notify('Logging out',{ className: "success", position:'top left'});
         setTimeout(()=>{
             location.replace('/users/login');
         },1000);
-    })
+    });
 }
 
 

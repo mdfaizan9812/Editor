@@ -3,13 +3,18 @@ class Modal {
     this.modalHTML = $(`<div id="modal">
           <div id="modal-overlay"></div>
           <div id="modal-body">
-              <div id="modal-header"><span class="modal-close">&#10005;</span></div>
+              <div id="modal-header">
+                <h2></h2>
+                <span class="modal-close">&#10005;</span>
+              </div>
               <div id="modal-content"></div>
           </div>
           </div>`);
 
     // add customization
     this.html = data.html;
+    this.header = data.header;
+    console.log(this.header);
   }
 
   init() {
@@ -36,6 +41,7 @@ class Modal {
 
     // add user html content to model-content
     $("#modal-content").html(this.html);
+    $('#modal-header>h2').text(this.header);
   }
 
   close() {

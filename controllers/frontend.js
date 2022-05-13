@@ -28,6 +28,7 @@ module.exports.signin = (req, res) => {
 };
 
 // to render link generator page
+// /users/link
 module.exports.linkGenerator = async (req, res) => {
   try {
     if (req.cookies.token) {
@@ -43,8 +44,19 @@ module.exports.linkGenerator = async (req, res) => {
     return res.redirect("/users/login");
     
   } catch (error) {
-    console.log(error);
-    res.send(error);
+    // token expired, get new
+    if(error.response && error.response.status === 401 && error.response.data.message === "TokenExpiredError"){
+      const token = await axios.post('/users/refresh_token',{'token':req.cookies.ref_token},{
+        baseURL: process.env.BASE_URL,
+      });
+
+      res.cookie('token',token.data.data.access_token, {path:'/', domain:'localhost'});
+      res.cookie('ref_token',token.data.data.refresh_token, {path:'/', domain:'localhost'});
+
+      return res.redirect('back');
+    }
+    
+    return res.redirect("/users/login");
   }
 };
 

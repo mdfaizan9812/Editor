@@ -1,26 +1,61 @@
 async function profile(){
+  try {
     // getting data from the server
-    let data = await axios.get('/users/profile',{headers:{'authorization': `Bearer ${localStorage.getItem('token')}`}});
+
+    let data = await axios.get('/users/profile',{headers:{'authorization': `Bearer ${$.cookie('token')}`}});
     let profileDetails = profileDOM(data.data);
 
-    let modal = new Modal({
-        html: profileDetails,
-    })
-    modal.init();
+    // create a modal and update the profile
+    createProfileModal(profileDetails);
+    
+    
+  } catch (error) {
+    if(error.response && error.response.status === 401 && error.response.data.message === "TokenExpiredError"){
 
-    // calling function to change profile
-    editProfile();
+      // get new access and reference token.
+      const token = await axios.post('/users/refresh_token',{'token':$.cookie('ref_token')});
+      
+      // set tokens in cookies
+      $.cookie("token", token.data.data.access_token, {path:'/'});
+      $.cookie("ref_token", token.data.data.refresh_token, {path:'/'});
 
-    // close modal on click cancel button
-    $('#cancel').click(function(){
-        modal.close();
-    });
-
-    // close modal on click cancel button
-    $('#save').click(function(){
-      modal.close();
-   });
+      // get users data
+      let data = await axios.get('/users/profile',{headers:{'authorization': `Bearer ${$.cookie('token')}`}});
+      let profileDetails = profileDOM(data.data);
+      // create a modal and update the profile
+      createProfileModal(profileDetails);
+      return;
+    }
+    if(error.response){
+        $.notify(error.response.data.message,"error");
+        return;
+    }
+    $.notify(error,"error");
+  }
 }
+
+function createProfileModal(profileDetails){
+  let modal = new Modal({
+    html: profileDetails,
+    header: 'About'
+  })
+  modal.init();
+  
+  // calling function to change profile
+  editProfile();
+  
+  // close modal on click cancel button
+  $('#cancel').click(function(){
+    modal.close();
+  });
+  
+  // close modal once changes done in profile
+  $('#save').click(function(){
+    modal.close();
+  });
+}
+
+
 
 function profileDOM(data){
     return $(`<div id="edit_box">
@@ -30,7 +65,6 @@ function profileDOM(data){
       <label for="file">Edit Photo</label>
     </div>
     <div id="profileDetails">
-      <h3>About</h3>
       <div id="details">
         <div id="id">
           <span><i class="fa-solid fa-id-card"></i></span>
@@ -95,15 +129,17 @@ function editProfile(){
           fd = new FormData();
           fd.append('username',username);
         }
-        let updatedProfile = await axios.post(`/users/update/${userid}`,fd,{headers:{'authorization': `Bearer ${localStorage.getItem('token')}`}});
+        let updatedProfile = await axios.post(`/users/update/${userid}`,fd,{headers:{'authorization': `Bearer ${$.cookie('token')}`}});
         $('#username').text(username);
         $('#imageFile>img').attr('src',updatedProfile.data.data.userImage)
         $('.profile>img').attr('src',updatedProfile.data.data.userImage)
         $.notify('Profile Updated',{ className: "success", position:'top right'});
         
     } catch (error) {
-        if(error.response && error.response.status === 422 || error.response.status === 401)
-          $.notify(error.response.data.message,{ className: "error", position:'top right'});
+        if(error.response && error.response.status === 422 || error.response.status === 401){
+          $.notify("Refresh your page and do again",{ className: "error", position:'top right'});
+          return;
+        }
     }
   });
 }
