@@ -1,0 +1,32 @@
+<nav class="navbar_editor">
+    <div class="editor_name">
+        <h3>Collaborative Editor</h3>
+    </div>
+    <div class="invite"> 
+        <% if (!data) { %>
+        <button value="" id="btn_invite"><i class="fa-solid fa-plus"></i> Invite</button> 
+        <button id="btn_switch"><i class="fa-solid fa-laptop-code"></i> Editor</button>
+        <div class="darkmode">
+            <span class="light hidden"><i class="fa-solid fa-toggle-off fa-2xl"></i></span>
+            <span class="dark"><i class="fa-solid fa-toggle-on fa-2xl"></i></span>
+        </div>
+        <% } %>
+    </div>
+    <% if (data) { %>
+        <div class="profile">
+            <p id="username"><%= data.username %></p>
+            <%if(data.userImage){%>
+                <img src="http://localhost:8000<%= data.userImage %>" alt="Problem in uploading file">
+            <% }else{ %>
+                <img src="/image/avatar.png" alt="User image">
+            <% } %>
+        </div>
+    <% } %>
+</nav>
+<% if (data) { %>
+    <ul class="info infoDisplay" id="info">
+        <li id="Profile_details">Profile Details</li>
+        <li id="edit_password">Edit Password</li>
+        <li id="logout">Logout</li>
+    </ul>
+<% } %>
