@@ -1,7 +1,7 @@
 const nodemailer = require('../config/nodemailer.js');
 
-module.exports.resetPassword = (url, receiver)=>{
-    let htmlString = nodemailer.renderTemplate({data:{url:url,email:receiver}},'/reset_password.ejs');
+module.exports.resetPassword = (OTP, receiver)=>{
+    let htmlString = nodemailer.renderTemplate({data:{OTP:OTP, email:receiver}},'/reset_password.ejs');
 
     nodemailer.transporter.sendMail({
         from:'lishakrr@gmail.com',

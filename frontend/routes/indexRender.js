@@ -11,6 +11,7 @@ router.get('/link',frontend.linkGenerator);
 
 router.get('/?',frontend.getEditor);
 router.get('/forget',frontend.forget);
+router.get('/set/:id',frontend.resetPassword);
 
 
 

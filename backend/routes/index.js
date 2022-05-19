@@ -10,8 +10,9 @@ router.post('/signup',userController.create);
 router.post('/login',userController.login);
 router.post('/refresh_token',userController.newToken);
 router.post('/run',compileController.compile);
-router.post('/forget',userController.forgetPassord);
-router.post('/resetPassword/:id',userController.changePassword);
+router.post('/forget',userController.sendEmailToResetPassword);
+router.post('/resetPassword/:id',userController.forgetPassword);
+router.post('/otp',userController.check_OTP);
 
 router.delete('/delete/:id',userAuth.authenticated,userController.destroy);
 router.post('/update/:id',userAuth.authenticated,userController.update);

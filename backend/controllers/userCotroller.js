@@ -235,30 +235,41 @@ module.exports.newToken = async (req, res) => {
 };
 
 // send email for reset password
-module.exports.forgetPassord = async (req, res) => {
+module.exports.sendEmailToResetPassword = async (req, res) => {
   try {
     let user = User.findOne({ email: req.body.email });
 
-    if (user) {
-      let code = uuid();
-      let createdLinkCode = await ResetPassword.create({
-        email: req.body.email,
-        code: code,
-      });
-      resetMailer.resetPassword(
-        `http://localhost:8000/users/resetPassword/${code}`,
-        req.body.email
-      );
-      return res.status(200).json({
-        success: "pass",
-        message: "Has been mailed to reset password",
-      });
-    } else {
+    if (!user){
       return res.status(400).json({
         success: "fail",
         message: "You are not registered user",
       });
     }
+    // Create random 4 digit for OTP
+    let OTP = Math.floor(Math.random(4) * 9000 + 1000);
+    // Check OTP exist(may be user request for OTP more than one within 10 minutes.)
+    let checkOTPExist = await ResetPassword.findOne({email: req.body.email});
+    if(checkOTPExist){
+      checkOTPExist.OTP = OTP;
+      checkOTPExist.save();
+    }
+    else{
+      await ResetPassword.create({
+        email: req.body.email,
+        OTP: OTP,
+      });
+    }
+    // send mail
+    resetMailer.resetPassword(
+      OTP,
+      req.body.email
+    );
+
+    return res.status(200).json({
+      success: "pass",
+      message: "Has been mailed to reset password",
+    });
+    
   } catch (error) {
     return res.status(400).json({
       success: "fail",
@@ -267,43 +278,75 @@ module.exports.forgetPassord = async (req, res) => {
   }
 };
 
+module.exports.check_OTP = async (req,res) => {
+  try {
+    const OTP = req.body.OTP;
+    const email = req.body.email;
+    const code = uuid();
+    
+    if(!OTP || !email){
+      return res.status(400).json({
+        success: 'fail',
+        message: 'Wrong OTP and email'
+      });
+    }
+
+    let checkOTP = await ResetPassword.findOne({email: email, OTP: OTP});
+    if(checkOTP){
+      checkOTP.code = code;
+      checkOTP.save();
+
+      return res.status(200).json({
+        success: 'pass',
+        code: code,
+        message: 'Ok OTP'
+      });
+    }
+    return res.status(400).json({
+      success: 'fail',
+      message: 'Wrong OTP'
+    });
+    
+  } catch (error) {
+    return res.status(500).json({
+      success: 'fail',
+      message: 'Server error'
+    });
+  }
+}
+
 // after getting form data which is filled by user in the registered email
-module.exports.changePassword = async (req, res) => {
+module.exports.forgetPassword = async (req, res) => {
   try {
     let code = req.params.id;
-    let email = req.body.email;
     let password = req.body.password;
-    let cPassword = req.body.Cpassword;
+    let cPassword = req.body.cPassword;
 
-    if (password === cPassword) {
-      let checkResetPassword = await ResetPassword.findOne({
-        email: email,
-        code: code,
-      });
-      if (checkResetPassword) {
-        let user = await User.findOne({ email: checkResetPassword.email });
-        let changedPassword = await hashPassword.bcryptPassword(password);
-        user.password = changedPassword;
-        user.save();
-        return res.status(200).json({
-            success:'pass',
-            message: 'Password has been changed'
-        })
-        // return res.status(200).redirect("/users/login");
-      } else {
-        return res.status(401).json({
-            success:'fail',
-            message: 'Unauthorized'
-        })
-        // return res.status(401).redirect("/users/login");
-      }
-    } else {
+    if (password !== cPassword) {
       return res.status(400).json({
         success: "fail",
         message: "Password matching failed",
       });
-      //return res.status(400).redirect("/users/forget");
     }
+    let checkResetPassword = await ResetPassword.findOne({
+      code: code,
+    });
+    if (checkResetPassword) {
+      let user = await User.findOne({ email: checkResetPassword.email });
+      let changedPassword = await hashPassword.bcryptPassword(password);
+      user.password = changedPassword;
+      user.save();
+      return res.status(200).json({
+          success:'pass',
+          message: 'Password has been changed'
+      });
+    } else {
+      return res.status(401).json({
+          success:'fail',
+          message: 'Unauthorized'
+      })
+    }
+    
   } catch (error) {
     return res.status(400).json({
       success: "fail",

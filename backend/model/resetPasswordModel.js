@@ -6,12 +6,16 @@ const resetPasswordSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    code: {
+    OTP: {
         type: String,
         unique: true,
         required: true
     },
-    createdAt: { type: Date, expires: '2m', default: Date.now }
+    code:{
+        type: String,
+        unique: true,
+    },
+    createdAt: { type: Date, expires: '10m', default: Date.now }
 },
 {
     timestamps:true
