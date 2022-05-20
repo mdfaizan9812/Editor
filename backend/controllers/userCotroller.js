@@ -237,8 +237,7 @@ module.exports.newToken = async (req, res) => {
 // send email for reset password
 module.exports.sendEmailToResetPassword = async (req, res) => {
   try {
-    let user = User.findOne({ email: req.body.email });
-
+    let user = await User.findOne({ email: req.body.email });
     if (!user){
       return res.status(400).json({
         success: "fail",
@@ -352,7 +351,6 @@ module.exports.forgetPassword = async (req, res) => {
       success: "fail",
       message: error,
     });
-    //return res.status(400).redirect("/users/login");
   }
 };
 

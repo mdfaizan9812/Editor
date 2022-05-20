@@ -4,14 +4,22 @@ function sendMailToResetPassword(){
     const emailSendContainer = $('#emailSendContainer');
     const otpContainer = $('#otpContainer');
     submit.click(async function(){
-        if(email.val()){
-            let data = await axios.post('/users/forget',{email:email.val()},{baseURL: "http://localhost:8000/",});
-            $.notify('Check Your Email',{className:'success', postion:'top'});
-            emailSendContainer.addClass('hidden');
-            otpContainer.removeClass('hidden');
-            CheckOTP();
-        }else{
-            $('#email').notify('Email is required',{className:'warn', elementPosition:'top right',});
+        try {
+            if(email.val()){
+                let data = await axios.post('/users/forget',{email:email.val()},{baseURL: "http://localhost:8000/",});
+                $.notify('Check Your Email',{className:'success', postion:'top'});
+                emailSendContainer.addClass('hidden');
+                otpContainer.removeClass('hidden');
+                CheckOTP();
+            }else{
+                $('#email').notify('Email is required',{className:'warn', elementPosition:'top right',});
+            }
+        } catch (error) {
+            if(error.response && error.response.status === 400){
+                $.notify(error.response.data.message,{className:'warn', postion:'top'});
+                return;
+            }
+            $.notify(error,{className:'warn', postion:'top'});
         }
     })
 }
@@ -25,7 +33,6 @@ function CheckOTP(){
         try {
             if(OTP.val() === '') {$.notify('Wrong OTP',{className:'warn', postion:'top'}); return;}
             let data = await axios.post('/users/otp',{OTP:OTP.val(), email: email.val()},{baseURL: "http://localhost:8000/",});
-            console.log(data);
             location.assign(`/users/set/${data.data.code}`)
         } catch (error) {
             if(error.response && error.response.status === 400) {$.notify(error.response.data.message,{className:'warn', postion:'top'}); return;}

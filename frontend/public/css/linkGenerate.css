@@ -93,7 +93,7 @@ body{
 }
 
 .generateLinkButton:hover{
-    background-color: rgb(119, 228, 228);
+    background-color: rgb(66, 128, 128);
     color: black;
 }
 
@@ -118,6 +118,6 @@ body{
 
 
 .btn button:hover{
-    background-color: rgb(119, 228, 228);
+    background-color: rgb(66, 128, 128);
     color: #000;
 }

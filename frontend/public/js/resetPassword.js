@@ -15,8 +15,11 @@ function reset_password(){
             },
             {baseURL: "http://localhost:8000/",});
 
-            location.assign('/users/login');
+            location.assign('/users/login?flag=4');
         } catch (error) {
+            if(error.response){
+                $.notify(error.response.data.message,"warn");
+            }
             $.notify(error,"warn");
         }
     })

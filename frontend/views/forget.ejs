@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="/css/forget.css">
 </head>
 <body>
-    <div class="container hidden" id="emailSendContainer">
+    <div class="container" id="emailSendContainer">
 
-        <h3 id="content">Write Your registered email below </h3>
+        <h3 id="content">Write your registered email below </h3>
 
         <div id="emailContainer" class="emailContainer">
             <i class="fa-solid fa-envelope" ></i>
@@ -25,12 +25,18 @@
             <button id="submit" class="submit">Submit</button>
         </div>
     </div>
-
-    <div class="container " id="otpContainer">
-        
+    <div class="container hidden" id="otpContainer">
         <form id="OTP_check">
-            <input type="text" placeholder="OTP" id="otp">
-            <button type="submit" id="send">Send</button>
+            <h3>Please enter the OTP below</h3>
+
+            <div id="emailContainer" class="emailContainer">
+                <i class="fa-solid fa fa-shield"></i>
+                <input type="text" placeholder="OTP" id="otp">
+            </div>
+    
+            <div class="button">
+                <button type="submit" id="send" class="submit">Send</button>
+            </div>
         </form>
     </div>
 

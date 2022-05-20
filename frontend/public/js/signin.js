@@ -1,3 +1,32 @@
+let params = new URLSearchParams(window.location.search);
+
+//getting unique params by their name
+let flag = params.get('flag');
+
+if(flag == 1){
+    $.notify("You have registered successfully","success");
+    params.set('flag',0);
+    history.replaceState(null,null, "?" + params.toString());
+}
+
+if(flag == 2){
+    $.notify('Logged-Out Successfully',{ className: "success", position:'top right'});
+    params.set('flag',0);
+    history.replaceState(null,null, "?" + params.toString());
+}
+
+if(flag == 3){
+    $.notify("User already exist",{ className: "info", position:'top right'});
+    params.set('flag',0);
+    history.replaceState(null,null, "?" + params.toString());
+}
+
+if(flag == 4){
+    $.notify("Password updated",{ className: "success", position:'top right'});
+    params.set('flag',0);
+    history.replaceState(null,null, "?" + params.toString());
+}
+
 function signin(){
     let email = $("input[name='email']");
     let password = $("input[name='password']");
@@ -21,7 +50,7 @@ function signin(){
             $.cookie("ref_token", tokens.data.data.refresh_token, {path:'/'});
 
             // redirect to link page
-            window.location.replace('/users/link')
+            window.location.replace('/users/link?flag=1')
             $(window).notify('error.response.data.message',"error");
         } catch (error) {
             // change::

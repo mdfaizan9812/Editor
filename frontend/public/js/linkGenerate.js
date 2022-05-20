@@ -79,6 +79,17 @@ function getLinkFromServer() {
   });
 }
 
+let params = new URLSearchParams(window.location.search);
+
+//getting unique params by their name
+let flag = params.get('flag');
+
+if(flag == 1){
+    $.notify("Logged-In Successfully","success");
+    params.set('flag',0);
+    history.replaceState(null,null, "?" + params.toString());
+}
+
 function getlink(url) {
   const inviteFriends = $(".invites");
   const join = $(".join");
@@ -102,16 +113,15 @@ function getlink(url) {
   );
 }
 
+
 function logout() {
-  $("#logout").click(function () {
-    $.removeCookie("token", { path: "/" });
-    $.removeCookie("ref_token", { path: "/" });
-    $.notify("Logging out", { className: "success", position: "top left" });
-    setTimeout(() => {
-      location.replace("/users/login");
-    }, 1000);
-  });
+  $('#logout').click(function(){
+    $.removeCookie('token', { path: '/' });
+    $.removeCookie('ref_token', { path: '/' });
+    location.replace('/users/login?flag=2');
+  })
 }
+
 
 logout();
 getLinkFromServer();
