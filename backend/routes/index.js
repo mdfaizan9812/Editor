@@ -23,5 +23,8 @@ router.get('/profile',userAuth.authenticated,userController.profile);
 router.get('/getlinkFromServer',userAuth.authenticated,generateLinkController.getlink);
 router.get('/editor?',generateLinkController.checkCredentialforEditor);
 
+// dummy routes to implement redis
+router.get('/dummy',userController.allUsers);
+
 
 module.exports = router;

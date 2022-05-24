@@ -13,6 +13,8 @@ const jwt = require("jsonwebtoken");
 const resetMailer = require("../mailers/reset_mailer.js");
 const { v4: uuid } = require("uuid");
 
+
+
 // creating a new user
 module.exports.create = async (req, res) => {
   try {
@@ -382,3 +384,4 @@ module.exports.editPassword = async (req, res) => {
     });
   }
 };
+

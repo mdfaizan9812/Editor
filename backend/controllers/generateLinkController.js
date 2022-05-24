@@ -23,7 +23,7 @@ module.exports.getlink = async (req,res) => {
                 });
                 
             }else{
-                
+                console.log('helllo')
                 newUrl = link.url;
             }
             
