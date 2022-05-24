@@ -13,7 +13,16 @@ const jwt = require("jsonwebtoken");
 const resetMailer = require("../mailers/reset_mailer.js");
 const { v4: uuid } = require("uuid");
 
-
+/*Redis*/
+const redis = require("redis");
+const client = redis.createClient();
+(async () => {
+  await client.connect();
+})();
+client.on("connect", function () {
+  console.log("Connected!");
+});
+/*Redis*/
 
 // creating a new user
 module.exports.create = async (req, res) => {
@@ -240,7 +249,7 @@ module.exports.newToken = async (req, res) => {
 module.exports.sendEmailToResetPassword = async (req, res) => {
   try {
     let user = await User.findOne({ email: req.body.email });
-    if (!user){
+    if (!user) {
       return res.status(400).json({
         success: "fail",
         message: "You are not registered user",
@@ -249,28 +258,23 @@ module.exports.sendEmailToResetPassword = async (req, res) => {
     // Create random 4 digit for OTP
     let OTP = Math.floor(Math.random(4) * 9000 + 1000);
     // Check OTP exist(may be user request for OTP more than one within 10 minutes.)
-    let checkOTPExist = await ResetPassword.findOne({email: req.body.email});
-    if(checkOTPExist){
+    let checkOTPExist = await ResetPassword.findOne({ email: req.body.email });
+    if (checkOTPExist) {
       checkOTPExist.OTP = OTP;
       checkOTPExist.save();
-    }
-    else{
+    } else {
       await ResetPassword.create({
         email: req.body.email,
         OTP: OTP,
       });
     }
     // send mail
-    resetMailer.resetPassword(
-      OTP,
-      req.body.email
-    );
+    resetMailer.resetPassword(OTP, req.body.email);
 
     return res.status(200).json({
       success: "pass",
       message: "Has been mailed to reset password",
     });
-    
   } catch (error) {
     return res.status(400).json({
       success: "fail",
@@ -279,42 +283,41 @@ module.exports.sendEmailToResetPassword = async (req, res) => {
   }
 };
 
-module.exports.check_OTP = async (req,res) => {
+module.exports.check_OTP = async (req, res) => {
   try {
     const OTP = req.body.OTP;
     const email = req.body.email;
     const code = uuid();
-    
-    if(!OTP || !email){
+
+    if (!OTP || !email) {
       return res.status(400).json({
-        success: 'fail',
-        message: 'Wrong OTP and email'
+        success: "fail",
+        message: "Wrong OTP and email",
       });
     }
 
-    let checkOTP = await ResetPassword.findOne({email: email, OTP: OTP});
-    if(checkOTP){
+    let checkOTP = await ResetPassword.findOne({ email: email, OTP: OTP });
+    if (checkOTP) {
       checkOTP.code = code;
       checkOTP.save();
 
       return res.status(200).json({
-        success: 'pass',
+        success: "pass",
         code: code,
-        message: 'Ok OTP'
+        message: "Ok OTP",
       });
     }
     return res.status(400).json({
-      success: 'fail',
-      message: 'Wrong OTP'
+      success: "fail",
+      message: "Wrong OTP",
     });
-    
   } catch (error) {
     return res.status(500).json({
-      success: 'fail',
-      message: 'Server error'
+      success: "fail",
+      message: "Server error",
     });
   }
-}
+};
 
 // after getting form data which is filled by user in the registered email
 module.exports.forgetPassword = async (req, res) => {
@@ -338,16 +341,15 @@ module.exports.forgetPassword = async (req, res) => {
       user.password = changedPassword;
       user.save();
       return res.status(200).json({
-          success:'pass',
-          message: 'Password has been changed'
+        success: "pass",
+        message: "Password has been changed",
       });
     } else {
       return res.status(401).json({
-          success:'fail',
-          message: 'Unauthorized'
-      })
+        success: "fail",
+        message: "Unauthorized",
+      });
     }
-    
   } catch (error) {
     return res.status(400).json({
       success: "fail",
@@ -380,8 +382,18 @@ module.exports.editPassword = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       success: "fail",
-      message: 'error',
+      message: "error",
     });
   }
 };
 
+// dummy to implement redis
+module.exports.allUsers = async (req, res) => {
+  let data = await client.get("allData");
+  if (data) {
+    return res.status(200).json(JSON.parse(data));
+  }
+  let data1 = await User.find({});
+  client.setEx("allData", 30, JSON.stringify(data1));
+  return res.status(200).json(data1);
+};
