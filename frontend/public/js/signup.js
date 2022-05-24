@@ -17,12 +17,27 @@ function signUp() {
         baseURL: "http://localhost:8000/",
       });
 
+<<<<<<< HEAD
       location.assign("/users/login");
     } catch (error) {
       console.log(error);
       if(error.response){
           $.notify(error.response.data.message, "error");
       }
+=======
+      location.assign("/users/login?flag=1");
+    } catch (error) {
+      console.log(error);
+      if(error.response && error.response.status === 422){
+        $.notify(error.response.data.message,{ className: "warn", position:'top right'});
+        return;
+      }
+      if(error.response && error.response.status === 403){
+          location.assign('/users/login?flag=3')
+          return;
+      }
+      $.notify(error,'warn');
+>>>>>>> separate
       location.replace("/users/login");
     }
   });

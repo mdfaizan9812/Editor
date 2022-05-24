@@ -13,7 +13,8 @@ const linkSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
-    }
+    },
+    createdAt: { type: Date, expires: 60*60*24, default: Date.now }
 },
 {
     timestamps:true

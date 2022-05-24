@@ -79,6 +79,20 @@ function getLinkFromServer() {
   });
 }
 
+<<<<<<< HEAD
+=======
+let params = new URLSearchParams(window.location.search);
+
+//getting unique params by their name
+let flag = params.get('flag');
+
+if(flag == 1){
+    $.notify("Logged-In Successfully","success");
+    params.set('flag',0);
+    history.replaceState(null,null, "?" + params.toString());
+}
+
+>>>>>>> separate
 function getlink(url) {
   const inviteFriends = $(".invites");
   const join = $(".join");
@@ -102,6 +116,7 @@ function getlink(url) {
   );
 }
 
+<<<<<<< HEAD
 function logout() {
   $("#logout").click(function () {
     $.removeCookie("token", { path: "/" });
@@ -113,6 +128,18 @@ function logout() {
   });
 }
 
+=======
+
+function logout() {
+  $('#logout').click(function(){
+    $.removeCookie('token', { path: '/' });
+    $.removeCookie('ref_token', { path: '/' });
+    location.replace('/users/login?flag=2');
+  })
+}
+
+
+>>>>>>> separate
 logout();
 getLinkFromServer();
 copyLink();

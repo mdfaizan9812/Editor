@@ -95,3 +95,9 @@ module.exports.getEditor = async (req, res) => {
 module.exports.forget = (req, res) => {
   return res.status(200).render("forget.ejs", { title: "Forget Password" });
 };
+
+
+// reset password page
+module.exports.resetPassword = (req, res) => {
+  return res.status(200).render('resetPassword.ejs',{code: req.params.id});
+}
