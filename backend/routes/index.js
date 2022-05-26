@@ -2,11 +2,12 @@ const userController = require("../controllers/userCotroller.js");
 const generateLinkController = require("../controllers/generateLinkController.js");
 const compileController = require("../controllers/compileController");
 const userAuth = require("../middlewares/isAuthenticate.js");
+const {limiter} = require('./../middlewares/ratelimiter.js')
 const express = require("express");
 const router = express.Router();
 
 router.post("/signup", userController.create);
-router.post("/login", userController.login);
+router.post("/login",limiter, userController.login);
 router.post("/refresh_token", userController.newToken);
 router.post("/run", compileController.compile);
 router.post("/forget", userController.sendEmailToResetPassword);
