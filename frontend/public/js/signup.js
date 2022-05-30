@@ -17,14 +17,6 @@ function signUp() {
         baseURL: "http://localhost:8000/",
       });
 
-<<<<<<< HEAD
-      location.assign("/users/login");
-    } catch (error) {
-      console.log(error);
-      if(error.response){
-          $.notify(error.response.data.message, "error");
-      }
-=======
       location.assign("/users/login?flag=1");
     } catch (error) {
       console.log(error);
@@ -37,7 +29,6 @@ function signUp() {
           return;
       }
       $.notify(error,'warn');
->>>>>>> separate
       location.replace("/users/login");
     }
   });

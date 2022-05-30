@@ -1,14 +1,6 @@
 function sendMailToResetPassword(){
     let email = $('#email');
     let submit = $('#submit');
-<<<<<<< HEAD
-    submit.click(async function(){
-        if(email.val()){
-            let data = await axios.post('/users/forget',{email:email.val()},{baseURL: "http://localhost:8000/",});
-            $.notify('Check Your Email',{className:'success', postion:'top'});
-        }else{
-            $('#email').notify('Email is required',{className:'warn', elementPosition:'top right',});
-=======
     const emailSendContainer = $('#emailSendContainer');
     const otpContainer = $('#otpContainer');
     submit.click(async function(){
@@ -28,13 +20,10 @@ function sendMailToResetPassword(){
                 return;
             }
             $.notify(error,{className:'warn', postion:'top'});
->>>>>>> separate
         }
     })
 }
 
-<<<<<<< HEAD
-=======
 function CheckOTP(){
     let email = $('#email');
     const OTP = $('#otp');
@@ -52,5 +41,4 @@ function CheckOTP(){
         }
     });
 }
->>>>>>> separate
 sendMailToResetPassword();
