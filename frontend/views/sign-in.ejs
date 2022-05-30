@@ -55,5 +55,14 @@
     <script src="https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js"></script>
 
     <script src="/js/signin.js"></script>
+    <script>
+        const logging = new login();
+        logging.signin();
+    </script>
+
+    <script>
+      const notifications = new notification();
+      notifications.checkFlagAndShowNotification();
+    </script>
 </body>
 </html>
