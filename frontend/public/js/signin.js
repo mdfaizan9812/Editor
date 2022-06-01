@@ -92,7 +92,7 @@ class login{
 
   saveIntoDB(data){
     return new Promise((resolve, reject) => {
-      let tokens = axios.post("/users/login", data, {   baseURL: "http://localhost:8000/",    });
+      let tokens = axios.post("/api/v1/users/login", data, {   baseURL: "http://localhost:8000/",    });
       resolve(tokens);
       reject(tokens);
     })

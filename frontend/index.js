@@ -16,8 +16,6 @@ const app = express();
 
 
 app.use(express.static('public'));
-// app.use('/uploads',express.static(__dirname + '/uploads'))
-
 
 
 app.use(cookieParser());
@@ -26,7 +24,7 @@ app.use(cookieParser());
 
 // ENDPOINT
 app.get('/',frontend.home);
-app.use('/users',require('./routes/indexRender.js'));
+app.use('/users',require('./routes/index.js'));
 
 // server listening
 app.listen(port,(err)=>{

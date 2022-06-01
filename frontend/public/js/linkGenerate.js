@@ -55,7 +55,7 @@ function getLinkFromServer() {
   // get link
   generateLinkButton.click(async function () {
     try {
-      let data = await axios.get("/users/getlinkFromServer", {
+      let data = await axios.get("/api/v1/generate/link", {
         baseURL: "http://localhost:8000/",
         headers: { authorization: `Bearer ${$.cookie("token")}` },
       });
@@ -67,7 +67,7 @@ function getLinkFromServer() {
         error.response.data.message === "TokenExpiredError"
       ) {
         // get new access and reference token.
-        const token = await axios.post("/users/refresh_token", {
+        const token = await axios.post("/api/v1/users/refresh", {
           token: $.cookie("ref_token"),
         },
         {baseURL: "http://localhost:8000/"});
@@ -76,7 +76,7 @@ function getLinkFromServer() {
         $.cookie("token", token.data.data.access_token, { path: "/" });
         $.cookie("ref_token", token.data.data.refresh_token, { path: "/" });
 
-        let data = await axios.get("/users/getlinkFromServer", {
+        let data = await axios.get("/api/v1/generate/link", {
             baseURL: "http://localhost:8000/",
           headers: { authorization: `Bearer ${$.cookie("token")}` },
         });

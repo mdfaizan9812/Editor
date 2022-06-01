@@ -1,7 +1,7 @@
 async function editPassword(){
     try {
         // getting data from the server
-        let data = await axios.get('/users/profile',{baseURL: "http://localhost:8000/",headers:{'authorization': `Bearer ${$.cookie('token')}`}});
+        let data = await axios.get('/api/v1/users/profile',{baseURL: "http://localhost:8000/",headers:{'authorization': `Bearer ${$.cookie('token')}`}});
         let editPasswordHTML = editPasswordDom(data.data.email);
         createEditPasswordModal(editPasswordHTML);
         
@@ -9,13 +9,13 @@ async function editPassword(){
     } catch (error) {
         if(error.response && error.response.status === 401 && error.response.data.message === "TokenExpiredError"){
             // get new access and reference token.
-            const token = await axios.post('/users/refresh_token',{'token':$.cookie('ref_token')},{baseURL: "http://localhost:8000/",});
+            const token = await axios.post('/api/v1/users/refresh',{'token':$.cookie('ref_token')},{baseURL: "http://localhost:8000/",});
 
             // set tokens in cookies
             $.cookie("token", token.data.data.access_token, {path:'/'});
             $.cookie("ref_token", token.data.data.refresh_token, {path:'/'});
 
-            let data = await axios.get('/users/profile',{baseURL: "http://localhost:8000/",headers:{'authorization': `Bearer ${$.cookie('token')}`}});
+            let data = await axios.get('/api/v1/users/profile',{baseURL: "http://localhost:8000/",headers:{'authorization': `Bearer ${$.cookie('token')}`}});
             let editPasswordHTML = editPasswordDom(data.data.email);
             createEditPasswordModal(editPasswordHTML);
             return;
@@ -57,7 +57,7 @@ function createEditPasswordModal(editPasswordHTML){
             if(password.val() === "" && confPassword.val() === ""){
                 throw "Enter Valid Password"
             }
-            let data = await axios.post('/users/editPassword',{
+            let data = await axios.post('/api/v1/users/reset',{
                 email: email.val(),
                 password: password.val(),
                 cPassword: confPassword.val()

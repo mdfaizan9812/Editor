@@ -2,7 +2,7 @@ async function profile(){
   try {
     // getting data from the server
 
-    let data = await axios.get('/users/profile',{baseURL: "http://localhost:8000/",headers:{'authorization': `Bearer ${$.cookie('token')}`}});
+    let data = await axios.get('/api/v1/users/profile',{baseURL: "http://localhost:8000/",headers:{'authorization': `Bearer ${$.cookie('token')}`}});
     let profileDetails = profileDOM(data.data);
 
     // create a modal and update the profile
@@ -13,14 +13,14 @@ async function profile(){
     if(error.response && error.response.status === 401 && error.response.data.message === "TokenExpiredError"){
 
       // get new access and reference token.
-      const token = await axios.post('/users/refresh_token',{'token':$.cookie('ref_token')},{baseURL: "http://localhost:8000/",});
+      const token = await axios.post('/api/v1/users/refresh',{'token':$.cookie('ref_token')},{baseURL: "http://localhost:8000/",});
       
       // set tokens in cookies
       $.cookie("token", token.data.data.access_token, {path:'/'});
       $.cookie("ref_token", token.data.data.refresh_token, {path:'/'});
 
       // get users data
-      let data = await axios.get('/users/profile',{baseURL: "http://localhost:8000/",headers:{'authorization': `Bearer ${$.cookie('token')}`}});
+      let data = await axios.get('/api/v1/users/profile',{baseURL: "http://localhost:8000/",headers:{'authorization': `Bearer ${$.cookie('token')}`}});
       let profileDetails = profileDOM(data.data);
       // create a modal and update the profile
       createProfileModal(profileDetails);
@@ -129,7 +129,7 @@ function editProfile(){
           fd = new FormData();
           fd.append('username',username);
         }
-        let updatedProfile = await axios.post(`/users/update/${userid}`,fd,{baseURL: "http://localhost:8000/",headers:{'authorization': `Bearer ${$.cookie('token')}`}});
+        let updatedProfile = await axios.put(`/api/v1/users/update/${userid}`,fd,{baseURL: "http://localhost:8000/",headers:{'authorization': `Bearer ${$.cookie('token')}`}});
         $('#username').text(username);
         $('#imageFile>img').attr('src',`http://localhost:8000${updatedProfile.data.data.userImage}`)
         $('.profile>img').attr('src',`http://localhost:8000${updatedProfile.data.data.userImage}`)

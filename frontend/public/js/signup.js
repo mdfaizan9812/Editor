@@ -55,7 +55,7 @@ class createAnAccount{
 
   saveIntoDB(data){
     return new Promise((resolve, reject) => {
-      let user = axios.post("/users/signup", data, {   baseURL: "http://localhost:8000/",    });
+      let user = axios.post("/api/v1/users/signup", data, {   baseURL: "http://localhost:8000/",    });
       resolve(user);
       reject(user);
     })

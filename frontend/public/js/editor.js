@@ -82,7 +82,7 @@ async function runEditorCode() {
     let editorValue = editor_textarea.val();
     let inputValue = inputContainer.val();
     let result = await axios.post(
-      "/users/run",
+      "/api/v1/compile/run",
       {
         editor_window: editorValue,
         language: language,

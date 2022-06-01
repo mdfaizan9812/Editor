@@ -42,7 +42,7 @@ class ResetPassword{
 
     saveIntoDB(data){
         return new Promise((resolve, reject) => {
-          let OTPData = axios.post('/users/forget',data,{baseURL: "http://localhost:8000/",});
+          let OTPData = axios.post('/api/v1/forget/mail',data,{baseURL: "http://localhost:8000/",});
           resolve(OTPData);
           reject(OTPData);
         })
@@ -76,7 +76,7 @@ class ResetPassword{
 
     saveIntoDB2(data){
         return new Promise((resolve, reject) => {
-          let OTP = axios.post('/users/otp',   {  OTP:data.OTP, email: data.email },{  baseURL: "http://localhost:8000/" });
+          let OTP = axios.post('/api/v1/forget/otp',   {  OTP:data.OTP, email: data.email },{  baseURL: "http://localhost:8000/" });
           resolve(OTP);
           reject(OTP);
         })
