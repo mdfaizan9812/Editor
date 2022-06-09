@@ -19,7 +19,7 @@ body{
 .outer{
     width: 100%;
     height: calc((100% - 65px));
-    background:url('/image/back_ground.png') no-repeat center center;
+    background:url('/dest/image/back_ground.png') no-repeat center center;
     display: flex;
     flex-direction: column;
     align-items: center;
